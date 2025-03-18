@@ -1,1 +1,123 @@
-## 夏威夷的个人主页
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>每日随机博客</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .post {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        p {
+            line-height: 1.6;
+            color: #666;
+        }
+        .date-info {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>每日精选文章</h1>
+    <div class="date-info" id="dateInfo"></div>
+    <div id="content"></div>
+
+    <script>
+        // 三个不同的文章集合
+        const collections = {
+            collection1: [
+                { title: "科技前沿：人工智能的发展", content: "近年来，人工智能技术取得了突破性进展..." },
+                { title: "区块链技术解析", content: "区块链作为分布式账本技术，正在改变..." },
+                { title: "量子计算的未来", content: "量子计算机的研发进入新阶段..." }
+            ],
+            collection2: [
+                { title: "健康生活小贴士", content: "每日适量运动对保持健康至关重要..." },
+                { title: "营养早餐搭配指南", content: "优质早餐应包含蛋白质、碳水化合物..." },
+                { title: "冥想与心理健康", content: "每日冥想15分钟可显著降低压力..." }
+            ],
+            collection3: [
+                { title: "经典文学赏析", content: "《百年孤独》中的魔幻现实主义..." },
+                { title: "现代诗歌欣赏", content: "海子的诗与远方..." },
+                { title: "推理小说发展史", content: "从爱伦坡到东野圭吾的演变..." }
+            ]
+        };
+
+        // 获取存储的日期和文章
+        function getDailyPosts() {
+            const today = new Date().toDateString();
+            const storedData = localStorage.getItem('dailyPosts');
+            
+            if (storedData) {
+                const data = JSON.parse(storedData);
+                if (data.date === today) {
+                    return data.posts;
+                }
+            }
+
+            // 随机选择新文章
+            const newPosts = {
+                post1: collections.collection1[Math.floor(Math.random() * collections.collection1.length)],
+                post2: collections.collection2[Math.floor(Math.random() * collections.collection2.length)],
+                post3: collections.collection3[Math.floor(Math.random() * collections.collection3.length)]
+            };
+
+            // 存储新数据
+            localStorage.setItem('dailyPosts', JSON.stringify({
+                date: today,
+                posts: newPosts
+            }));
+
+            return newPosts;
+        }
+
+        // 渲染文章
+        function renderPosts() {
+            const posts = getDailyPosts();
+            const contentDiv = document.getElementById('content');
+            const dateInfoDiv = document.getElementById('dateInfo');
+            
+            dateInfoDiv.textContent = `更新日期：${new Date().toLocaleDateString()}`;
+
+            contentDiv.innerHTML = `
+                <div class="post">
+                    <h2>${posts.post1.title}</h2>
+                    <p>${posts.post1.content}</p>
+                </div>
+                <div class="post">
+                    <h2>${posts.post2.title}</h2>
+                    <p>${posts.post2.content}</p>
+                </div>
+                <div class="post">
+                    <h2>${posts.post3.title}</h2>
+                    <p>${posts.post3.content}</p>
+                </div>
+            `;
+        }
+
+        // 页面加载时渲染
+        window.onload = renderPosts;
+    </script>
+</body>
+</html>
