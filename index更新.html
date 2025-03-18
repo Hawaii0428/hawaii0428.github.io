@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
     <title>小纸条</title>
+    <link href="css/styles.css" rel="stylesheet" />
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -80,17 +81,14 @@
         }
         .close {
             position: absolute;
-            right: 20px;
+            right: 5%;
             top: 10px;
             font-size: 28px;
             cursor: pointer;
         }
         .modal-content p {
         white-space: pre-wrap;  /* 保留换行符 */
-        text-indent: 2em;      /* 首行缩进2字符 */
-        line-height: 1.8;      /* 增加行距 */
-        margin-bottom: 1.2em;   /* 段落间距 */
-         }
+        }
    @media screen and (max-width: 768px) {
         body {
             width: 90%;
@@ -123,58 +121,52 @@
     </div>
 
     <script>
-        // 扩展后的文章集合（包含完整内容）
-        const collections = {
-            collection1: [
-                { 
-                    title: "2025.03.17", 
-                    content: "今天看到天边的云似乎有出现火烧云的可能性...",
-                    fullContent: "\t今天看到天边的云似乎有出现火烧云的可能性，就和他一起去海淀公园旁的天桥试图看晚霞。\n\t阳光透过云的间隙，映到上方连片的云底，形成一条暖黄色的光带。这理应是生活中再为常见不过的景象，我却真心为看到这阳光的路迹而心生喜悦。\n\t想来这也与对天上的所有事物都抱有热忱的他关系很大：喜欢看飞机，喜欢看粉色的云，也喜欢给云镶上金边的云隙光……当一个人的眼睛里都不自觉地流露出对生活的热爱的时候，身边的人很难不被感染，很难不去喜欢他吧。\n\t好喜欢他。"
-                },
-                // 其他文章类似...
-            ],
-            collection2: [
-                { 
-                    title: "2025.03.15", 
-                    content: "今天因为一些契机，听他聊起了之前做家教的经历..." ,
-                    fullContent:"\t今天因为一些契机，听他聊起了之前做家教的经历，看着他眼睛亮亮地讲自己游刃有余地教高中生，也被家长信赖的经历，感觉他好可爱。\n\t后面聊着聊着，就讲起他的理想。从高中时开始接触物理竞赛，到本科时毅然选择了航天航空。我问他现在是否仍旧热爱自己的专业，他毫不犹豫地给了肯定的回答，还说希望自己以后的工作可以对世界产生影响，比如给某个飞机拧两颗螺丝（此处应该有专业术语，但原谅我没记住hhhh）。\n\t他这样的对专业、未来和理想的期许，总是能让我感到自身不足的同时又感到鼓舞，是啊，人多渺小，可是能发挥改变世界的主观能动性，却又多宝贵。\n\t很喜欢他，很欣赏他，很幸运能和他在一起。"
-                },
-                {
-                    title: "2025.03.06", 
-                    content: "昨天某些憨憨把电动车钥匙搞掉了..." ,
-                    fullContent:"\t昨天某些憨憨把电动车钥匙搞掉了，那个着急的，哎呀，在电话里面都能听出来的难过。这怎么可能放着不管呢？只能骑车陪他一起找了。\n\t概率上来说我知道这很难找到，但是在彼时彼刻，我的第一反应仅仅只是，他很需要我，他很难过。而见到他之后，他果然开心了一点。嗯，如我所料。陪他去把车停在修车店门口后，这人拗不过我，又被我硬生生骑车送回北大。但他还是那么细心，在我考虑要不要打个车回去的时候，他就悄悄帮我下好单了。\n\t嗯……我知道世界上很多事情难以做到完美，人力可及的实在有限，但是总还是会想，在我有余力的时候多做一点，做得更好一点。"
+        const collectionPaths = [
+            'setting/tx/c1',
+            'setting/tx/c2',
+            'setting/tx/c3'
+        ];
+        async function getRandomArticles() {
+            try {
+                const selectedArticles = [];
+                
+                for (const collectionPath of collectionPaths) {
+
+                    const response = await fetch(`${collectionPath}/filelist.txt`);
+                    const fileList = await response.text();
+                    const files = fileList.split('\n').filter(f => f);
+
+                    const randomFile = files[Math.floor(Math.random() * files.length)];
+                    const articleResponse = await fetch(`${collectionPath}/${randomFile}`);
+                    const article = await articleResponse.json();
+                    
+                    selectedArticles.push(article);
                 }
-            ],
-            collection3: [
-                { 
-                    title: "2025.03.08", 
-                    content: "因为一件昨天的小事和他好好聊了聊...",
-                    fullContent:"\t因为一件昨天的小事和他好好聊了聊。事情说起来是真的小，概括一下就是我和他分享了一件（在我看来）值得一试，对我们的生活可能有些影响，但其实还八字没有一撇的事情之后，他给了我一个超出想象的激烈的反应。这让我产生了了一些疑虑。\n\t跟他好好聊过之后，我发现（或者说验证）了这件事其实并非我想做的事情和他想要的事情有关乎本质的冲突，而是……怎么说呢，这种激烈的反应背后，其实是他惊慌和脆弱的部分。但即使是在这种情况下，他昨天也表现出了想要抵抗这种用激烈的反应来改变我的行为，按照我想要的方式支持我的想法。而令我感到心疼（甚至还有点气）的部分，是他告诉我如果我直接决定这个事情然后让他接受，即使这个事情可能对我们的生活产生重大影响，他反而会更加平静的接受这种事情，因为习惯了。\n\t……我不好说，在他说完之前我就猜到了这个答案，但我实在是觉得这并不公平。说到底，人怎么能完全不考虑自己爱的人的感受呢？光是想一想，都令我感到很难过。于是想要记录下来，希望我能一直不要忘记，或者至少还能想起。\n\t听起来可能有些荒谬，但是我确实觉得我更加爱他了。爱他真实，爱他确知痛苦，却仍然努力跨过这些障碍来爱我。也因此，实际上我一直相信他不会真的让我做不想做的事。哎，每次写到最后都会觉得自己运气很好，但是毕竟这是客观事实，所以x\n\t好爱他。" 
-                },
-            ]
-            // collection2 和 collection3 的结构同上...
-        };
+
+                return {
+                    post1: selectedArticles[0],
+                    post2: selectedArticles[1],
+                    post3: selectedArticles[2]
+                };
+            } catch (error) {
+                console.error('加载文章失败:', error);
+                return getFallbackArticles(); // 备用方案
+            }
+        }
 
         // 获取存储的日期和文章
-        function getDailyPosts() {
+        // 修改获取文章逻辑
+        async function getDailyPosts() {
             const today = new Date().toDateString();
             const storedData = localStorage.getItem('dailyPosts');
             
             if (storedData) {
                 const data = JSON.parse(storedData);
-                if (data.date === today) {
-                    return data.posts;
-                }
+                if (data.date === today) return data.posts;
             }
 
-            // 随机选择新文章
-            const newPosts = {
-                post1: collections.collection1[Math.floor(Math.random() * collections.collection1.length)],
-                post2: collections.collection2[Math.floor(Math.random() * collections.collection2.length)],
-                post3: collections.collection3[Math.floor(Math.random() * collections.collection3.length)]
-            };
-
-            // 存储新数据
+            const newPosts = await getRandomArticles();
+            
             localStorage.setItem('dailyPosts', JSON.stringify({
                 date: today,
                 posts: newPosts
@@ -210,8 +202,9 @@
         }
 
         // 渲染文章列表
-        function renderPosts() {
-            const posts = getDailyPosts();
+        
+        async function renderPosts() {
+            const posts = await getDailyPosts();
             const contentDiv = document.getElementById('content');
             const dateInfoDiv = document.getElementById('dateInfo');
             
