@@ -79,7 +79,18 @@
         text-indent: 2em;      /* 首行缩进2字符 */
         line-height: 1.8;      /* 增加行距 */
         margin-bottom: 1.2em;   /* 段落间距 */
-    }
+         }
+    @media (max-width: 768px) {
+        .modal-content {
+            width: 90%;
+            padding: 15px;
+        }
+        .modal-content p {
+            font-size: 14px;
+            text-indent: 1.5em;
+        }
+    }/* 移动端适配 */
+
     </style>
 </head>
 <body>
