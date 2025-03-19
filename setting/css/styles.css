@@ -1,4 +1,5 @@
 /* style.css */
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     max-width: 800px;
@@ -87,8 +88,9 @@ body.modal-open {
     cursor: pointer;
 }
 
-.modal-content p {
-    white-space: pre-wrap;
+.article-paragraph {
+    text-indent: 2em;    /* 首行缩进 */
+    margin: 0; 
 }
 
 /* 移动端适配 */
@@ -105,5 +107,9 @@ body.modal-open {
     
     .modal-content p {
         font-size: 14px;
+    }
+    .article-paragraph {
+        text-indent: 1.5em;  /* 移动端稍小缩进 */
+        font-size: 14px;     /* 适合小屏幕的字号 */
     }
 }

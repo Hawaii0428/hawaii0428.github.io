@@ -57,7 +57,7 @@
         // 获取存储的日期和文章
         // 修改获取文章逻辑
         async function getDailyPosts() {
-            const today = new Date().toDateString()+1;
+            const today = new Date().toDateString();
             const storedData = localStorage.getItem('dailyPosts');
             
             if (storedData) {
@@ -81,8 +81,18 @@
             const posts = JSON.parse(localStorage.getItem('dailyPosts')).posts;
             const article = posts[postKey];
             
+                
+        // 处理段落格式
+        const formattedContent = article.fullContent
+        .split('\n\n') // 保持用两个换行符分隔段落
+        .map(paragraph => `
+            <p class="article-paragraph">
+                ${paragraph.trim().replace(/\n/g, '')}
+            </p>
+        `).join(''); // 直接拼接，不添加额外换行
+            
             document.getElementById('modalTitle').textContent = article.title;
-            document.getElementById('modalContent').textContent = article.fullContent;
+            document.getElementById('modalContent').innerHTML = formattedContent;
             document.getElementById('articleModal').style.display = 'block';
         }
 
