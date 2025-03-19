@@ -91,7 +91,6 @@ body.modal-open {
 .article-paragraph {
     text-indent: 2em;    /* 首行缩进 */
     margin: 0; 
-    white-space:pre-line;
 }
 
 /* 移动端适配 */
