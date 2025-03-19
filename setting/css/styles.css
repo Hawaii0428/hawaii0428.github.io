@@ -104,10 +104,6 @@ body.modal-open {
         padding: 15px;
         max-height: 80vh;
     }
-    
-    .modal-content p {
-        font-size: 14px;
-    }
     .article-paragraph {
         text-indent: 1.5em;  /* 移动端稍小缩进 */
         font-size: 14px;     /* 适合小屏幕的字号 */
