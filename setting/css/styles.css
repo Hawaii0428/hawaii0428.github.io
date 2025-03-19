@@ -1,5 +1,4 @@
-@charset "UTF-8";
-
+/* style.css */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     max-width: 800px;
@@ -7,6 +6,7 @@ body {
     padding: 20px;
     background-color: #f5f5f5;
 }
+
 .post {
     position: relative;
     background-color: white;
@@ -15,25 +15,30 @@ body {
     margin: 20px 0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
 h1 {
     color: #333;
     text-align: center;
     margin-bottom: 40px;
 }
+
 h2 {
     color: #2c3e50;
     border-bottom: 2px solid #3498db;
     padding-bottom: 10px;
 }
+
 p {
     line-height: 1.6;
     color: #666;
 }
+
 .date-info {
     text-align: center;
     color: #7f8c8d;
     margin-bottom: 30px;
 }
+
 .read-more {
     position: absolute;
     bottom: 15px;
@@ -42,6 +47,7 @@ p {
     text-decoration: none;
     font-weight: bold;
 }
+
 /* 模态框样式 */
 .modal {
     display: none;
@@ -52,9 +58,10 @@ p {
     height: 100%;
     background-color: rgba(0,0,0,0.7);
     z-index: 999;
-    overflow: auto; /* 启用滚动 */
-    -webkit-overflow-scrolling: touch; /* 移动端顺滑滚动 */
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
+
 .modal-content {
     position: relative;
     background-color: white;
@@ -63,16 +70,15 @@ p {
     max-width: 800px;
     border-radius: 10px;
     line-height: 1.8;
-    max-height: 80vh; /* 最大高度为视口的80% */
-    overflow-y: auto; /* 内容超出时出现滚动条 */
-    margin: 20px auto; /* 增加垂直间距 */
+    max-height: 80vh;
+    overflow-y: auto;
+    margin: 20px auto;
 }
- /* 添加这个新规则防止页面滚动 */
+
 body.modal-open {
     overflow: hidden;
-    /* 不知道这里为什么会出问题，但总之先注释掉 */
-    /* position: fixed; */
 }
+
 .close {
     position: fixed;
     right: 20px;
@@ -80,20 +86,24 @@ body.modal-open {
     font-size: 28px;
     cursor: pointer;
 }
+
 .modal-content p {
-white-space: pre-wrap;  /* 保留换行符 */
- }
+    white-space: pre-wrap;
+}
+
+/* 移动端适配 */
 @media screen and (max-width: 768px) {
-body {
-    width: 90%;
+    body {
+        width: 90%;
+    }
+    
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+        max-height: 80vh;
+    }
+    
+    .modal-content p {
+        font-size: 14px;
+    }
 }
-.modal-content {
-    width: 90%;
-    padding: 15px;
-    max-height: 80vh;
-}
-.modal-content p {
-    font-size: 14px;
-    text-indent: 1.5em;
-}
-}/* 移动端适配 */
