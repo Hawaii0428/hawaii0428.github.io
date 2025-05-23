@@ -4,7 +4,6 @@ bdjkh.json
 chsjk.json
 dhjkl.json
 DSNL1.json
-FASEK.json
 SDFIJ.json
 SDVJK.json
 SFHKN.json
