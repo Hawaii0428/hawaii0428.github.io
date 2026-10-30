@@ -200,6 +200,7 @@ def main(argv=None):
     parser.add_argument("--summary-length", type=nonnegative_int, default=15,
                         help="摘要最多保留的字符数（不含省略号），默认 15，0 表示不生成摘要")
     parser.add_argument("--after", type=parse_after, metavar="TIME",
+                        default=parse_after("2026-05-01 00:00:00"),
                         help="仅导出严格晚于此时刻的评论；日期或日期加时间，默认北京时间")
     parser.add_argument("--dry-run", action="store_true", help="仅统计，不写文件")
     parser.add_argument("--overwrite", action="store_true", help="允许更新同一评论 ID 的已有卡片，默认保留已有内容")
